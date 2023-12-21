@@ -1,0 +1,19 @@
+{
+    "extends": ["stylelint-config-standard"],
+    "customSyntax": "postcss-less",
+    "rules": {
+        "string-quotes": "single",
+        "import-notation": "string",
+        "comment-empty-line-before": "always",
+        "unit-allowed-list": [
+            "px",
+            "rem",
+            "%",
+            "s",
+            "fr",
+            "vh",
+            "vw",
+            "deg"
+        ]
+    }
+}
