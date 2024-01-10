@@ -9,7 +9,9 @@
         <item name="template" xsi:type="string">templates/form/collapsible</item>
     </argument>
     <settings>
-
+        <buttons>
+            <button name="save" class="Gustav\Thesis\Block\Adminhtml\StoreLocator\SaveButton"/>
+        </buttons>
         <namespace>storelocator_form</namespace>
         <dataScope>data</dataScope>
         <deps>
