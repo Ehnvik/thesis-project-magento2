@@ -33,6 +33,6 @@ class DataProvider extends AbstractDataProvider
      */
     public function getData(): array
     {
-        return $this->collection->toArray();
+       return $this->collection->toArray();
     }
 }
