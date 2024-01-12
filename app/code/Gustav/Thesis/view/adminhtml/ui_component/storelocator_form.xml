@@ -20,7 +20,6 @@
     </settings>
     <dataSource name="storelocator_form_data_source" component="Magento_Ui/js/form/provider">
         <argument name="dataProvider" xsi:type="configurableObject">
-            <!-- Ange din DataProvider-klass här -->
             <argument name="class" xsi:type="string">Gustav\Thesis\Model\DataProvider</argument>
             <argument name="name" xsi:type="string">storelocator_form_data_source</argument>
             <argument name="primaryFieldName" xsi:type="string">store_id</argument>
@@ -51,6 +50,9 @@
                 <dataType>text</dataType>
                 <label translate="true">Address</label>
                 <dataScope>address</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
             </settings>
         </field>
 
@@ -59,6 +61,9 @@
                 <dataType>text</dataType>
                 <label translate="true">City</label>
                 <dataScope>city</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
             </settings>
         </field>
 
@@ -67,6 +72,9 @@
                 <dataType>text</dataType>
                 <label translate="true">Postcode</label>
                 <dataScope>postcode</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
             </settings>
         </field>
 
@@ -75,6 +83,9 @@
                 <dataType>text</dataType>
                 <label translate="true">Country</label>
                 <dataScope>country</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
             </settings>
         </field>
 
@@ -99,6 +110,9 @@
                 <dataType>text</dataType>
                 <label translate="true">Latitude</label>
                 <dataScope>latitude</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
             </settings>
         </field>
 
@@ -107,6 +121,9 @@
                 <dataType>text</dataType>
                 <label translate="true">Longitude</label>
                 <dataScope>longitude</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
             </settings>
         </field>
     </fieldset>

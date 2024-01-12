@@ -36,7 +36,7 @@ public function execute()
 
         if (!$data) {
             $this->messageManager->addErrorMessage(__('No data to save.'));
-            return $redirect->setPath('*/*/');
+            return $redirect->setPath('*/*/index');
         }
 
         try {
