@@ -68,5 +68,16 @@
                 </item>
             </argument>
         </column>
+        <actionsColumn name="actions" class="Magento\Theme\Ui\Component\Listing\Column\ViewAction" sortOrder="50">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="viewUrlPath" xsi:type="string">storelocator/storelocator/edit</item>
+                    <item name="urlEntityParamName" xsi:type="string">store_id</item>
+                </item>
+            </argument>
+            <settings>
+                <indexField>store_id</indexField>
+            </settings>
+        </actionsColumn>
     </columns>
 </listing>

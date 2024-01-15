@@ -11,6 +11,8 @@
     <settings>
         <buttons>
             <button name="save" class="Gustav\Thesis\Block\Adminhtml\StoreLocator\SaveButton"/>
+<!--            <button name="delete" class="Gustav\Thesis\Block\Adminhtml\StoreLocator\DeleteButton"/>-->
+<!--            <button name="back" class="Gustav\Thesis\Block\Adminhtml\StoreLocator\BackButton"/>-->
         </buttons>
         <namespace>storelocator_form</namespace>
         <dataScope>data</dataScope>
@@ -20,7 +22,6 @@
     </settings>
     <dataSource name="storelocator_form_data_source" component="Magento_Ui/js/form/provider">
         <argument name="dataProvider" xsi:type="configurableObject">
-            <!-- Ange din DataProvider-klass här -->
             <argument name="class" xsi:type="string">Gustav\Thesis\Model\DataProvider</argument>
             <argument name="name" xsi:type="string">storelocator_form_data_source</argument>
             <argument name="primaryFieldName" xsi:type="string">store_id</argument>
@@ -34,20 +35,30 @@
         <settings>
             <label translate="true">Store Information</label>
         </settings>
-
-        <field name="store_name" sortOrder="10" formElement="input">
+        <!-- ID field, not visible to the user -->
+        <field name="store_id" formElement="input">
             <settings>
                 <dataType>text</dataType>
-                <label translate="true">Store Name</label>
-                <dataScope>store_name</dataScope>
+                <visible>false</visible>
+                <dataScope>store_id</dataScope>
+            </settings>
+        </field>
+        <!-- Other fields similar to your original form, adjusted as necessary -->
+        <field name="store_name" sortOrder="10" formElement="input">
+            <settings>
                 <validation>
                     <rule name="required-entry" xsi:type="boolean">true</rule>
                 </validation>
+                <dataType>text</dataType>
+                <label translate="true">Store Name</label>
+                <dataScope>store_name</dataScope>
             </settings>
         </field>
-
         <field name="address" sortOrder="20" formElement="input">
             <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
                 <dataType>text</dataType>
                 <label translate="true">Address</label>
                 <dataScope>address</dataScope>
@@ -55,15 +66,21 @@
         </field>
 
         <field name="city" sortOrder="30" formElement="input">
-            <settings>
-                <dataType>text</dataType>
-                <label translate="true">City</label>
-                <dataScope>city</dataScope>
-            </settings>
+        <settings>
+        <validation>
+            <rule name="required-entry" xsi:type="boolean">true</rule>
+        </validation>
+            <dataType>text</dataType>
+            <label translate="true">City</label>
+            <dataScope>city</dataScope>
+        </settings>
         </field>
 
         <field name="postcode" sortOrder="40" formElement="input">
             <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
                 <dataType>text</dataType>
                 <label translate="true">Postcode</label>
                 <dataScope>postcode</dataScope>
@@ -72,6 +89,9 @@
 
         <field name="country" sortOrder="50" formElement="input">
             <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
                 <dataType>text</dataType>
                 <label translate="true">Country</label>
                 <dataScope>country</dataScope>
@@ -85,17 +105,19 @@
                 <dataScope>phone</dataScope>
             </settings>
         </field>
-
         <field name="hours" sortOrder="70" formElement="input">
-            <settings>
-                <dataType>text</dataType>
-                <label translate="true">Opening Hours</label>
-                <dataScope>hours</dataScope>
-            </settings>
+        <settings>
+        <dataType>text</dataType>
+            <label translate="true">Opening Hours</label>
+            <dataScope>hours</dataScope>
+        </settings>
         </field>
 
         <field name="latitude" sortOrder="80" formElement="input">
             <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
                 <dataType>text</dataType>
                 <label translate="true">Latitude</label>
                 <dataScope>latitude</dataScope>
@@ -104,10 +126,15 @@
 
         <field name="longitude" sortOrder="90" formElement="input">
             <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
                 <dataType>text</dataType>
                 <label translate="true">Longitude</label>
                 <dataScope>longitude</dataScope>
             </settings>
         </field>
+
     </fieldset>
 </form>
+
