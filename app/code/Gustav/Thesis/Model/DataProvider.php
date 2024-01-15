@@ -57,7 +57,7 @@ class DataProvider extends AbstractDataProvider
         if ($storeId) {
             $storeData = $this->collection->getItemById($storeId)->getData();
             if ($storeData) {
-                $this->loadedData[$storeId] = ['store' => $storeData];
+                $this->loadedData[$storeId] = $storeData;
             }
         }
 

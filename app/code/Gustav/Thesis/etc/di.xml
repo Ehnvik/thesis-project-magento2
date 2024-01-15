@@ -1,13 +1,33 @@
 <?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <type name="Gustav\Thesis\Controller\Adminhtml\StoreLocator\Edit">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Preference for DataProvider -->
+<!--    <preference for="Gustav\Thesis\Model\DataProvider"-->
+<!--                type="Gustav\Thesis\Model\DataProvider" />-->
+
+    <!-- Virtual type for the collection -->
+    <virtualType name="Gustav\Thesis\Model\ResourceModel\Grid\Collection\StoreLocator"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
-            <argument name="registry" xsi:type="object">Magento\Framework\Registry</argument>
+            <argument name="mainTable" xsi:type="string">store_locator</argument>
+            <argument name="resourceModel" xsi:type="string">Gustav\Thesis\Model\ResourceModel\StoreLocator</argument>
         </arguments>
-    </type>
-    <type name="Gustav\Thesis\Model\DataProvider">
+    </virtualType>
+
+    <!-- Virtual type for GridDataProvider -->
+    <virtualType name="GridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
         <arguments>
-            <argument name="dataPersistor" xsi:type="object">Magento\Framework\App\Request\DataPersistorInterface</argument>
+            <argument name="collection" xsi:type="object" shared="false">Gustav\Thesis\Model\ResourceModel\Grid\Collection\StoreLocator</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- CollectionFactory configuration -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="storelocator_listing_data_source" xsi:type="string">Gustav\Thesis\Model\ResourceModel\Grid\Collection\StoreLocator</item>
+                <item name="storelocator_form_data_source" xsi:type="string">Gustav\Thesis\Model\ResourceModel\Grid\Collection\StoreLocator</item>
+            </argument>
         </arguments>
     </type>
 </config>
