@@ -43,8 +43,28 @@
         <filterSearch name="fulltext"/>
         <filters name="listing_filters"/>
         <paging name="listing_paging"/>
+        <massaction name="listing_massaction">
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <message translate="true">Are you sure you want to delete selected stores?</message>
+                        <title translate="true">Delete items</title>
+                    </confirm>
+                    <url path="storelocator/storelocator/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                </settings>
+            </action>
+        </massaction>
     </listingToolbar>
     <columns name="storelocator_storelocator_columns">
+        <selectionsColumn name="ids">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">store_id</item>
+                </item>
+            </argument>
+        </selectionsColumn>
         <column name="store_id">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -68,7 +88,7 @@
                 </item>
             </argument>
         </column>
-        <actionsColumn name="actions" class="Magento\Theme\Ui\Component\Listing\Column\ViewAction" sortOrder="50">
+        <actionsColumn name="actions" class="Magento\Theme\Ui\Component\Listing\Column\ViewAction">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="viewUrlPath" xsi:type="string">storelocator/storelocator/edit</item>
