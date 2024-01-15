@@ -11,7 +11,7 @@
     <settings>
         <buttons>
             <button name="save" class="Gustav\Thesis\Block\Adminhtml\StoreLocator\SaveButton"/>
-<!--            <button name="delete" class="Gustav\Thesis\Block\Adminhtml\StoreLocator\DeleteButton"/>-->
+            <button name="delete" class="Gustav\Thesis\Block\Adminhtml\StoreLocator\DeleteButton"/>
 <!--            <button name="back" class="Gustav\Thesis\Block\Adminhtml\StoreLocator\BackButton"/>-->
         </buttons>
         <namespace>storelocator_form</namespace>
