@@ -29,16 +29,36 @@ class Save extends Action
         $this->dataPersistor = $dataPersistor;
     }
 
-public function execute()
+    public function execute()
     {
         $redirect = $this->resultRedirectFactory->create();
         $data = $this->getRequest()->getPostValue();
+
+        $storeId = $data['store_id'] ?? null;
 
         if (!$data) {
             $this->messageManager->addErrorMessage(__('No data to save.'));
             return $redirect->setPath('*/*/index');
         }
 
+        $data['store_name'] = htmlspecialchars(strip_tags($data['store_name']));
+        $data['address'] = htmlspecialchars(strip_tags($data['address']));
+        $data['city'] = htmlspecialchars(strip_tags($data['city']));
+
+        $sanitizedPostcode = filter_var($data['postcode'], FILTER_SANITIZE_NUMBER_INT);
+        $data['postcode'] = preg_replace('/[^0-9]/', '', $sanitizedPostcode);
+
+        $data['country'] = htmlspecialchars(strip_tags($data['country']));
+        $data['latitude'] = filter_var($data['latitude'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+        $data['longitude'] = filter_var($data['longitude'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+
+        if (!empty($data['phone'])) {
+            $data['phone'] = htmlspecialchars(preg_replace('/[^+\d]/', '', $data['phone']));
+        }
+
+        if (!empty($data['hours'])) {
+            $data['hours'] = htmlspecialchars($data['hours']);
+        }
 
         $validationErrors = $this->validateData($data);
 
@@ -46,7 +66,14 @@ public function execute()
             foreach ($validationErrors as $error) {
                 $this->messageManager->addErrorMessage($error);
             }
-            return $redirect->setPath('*/*/newstore');
+
+            $this->dataPersistor->set('storelocator_form', $data);
+
+            if ($storeId) {
+                return $redirect->setPath('*/*/edit', ['store_id' => $storeId]);
+            } else {
+                return $redirect->setPath('*/*/newstore');
+            }
         }
 
         try {
@@ -54,13 +81,21 @@ public function execute()
             $storeLocator->setData($data);
             $this->storeLocatorResource->save($storeLocator);
 
-            $this->messageManager->addSuccessMessage(__('The new store has been successfully saved.'));
+            $this->messageManager->addSuccessMessage(__('The store has been successfully saved.'));
+            $this->dataPersistor->clear('storelocator_form');
             return $redirect->setPath('*/*/edit', ['store_id' => $storeLocator->getId()]);
         } catch (\Exception $e) {
             $this->messageManager->addErrorMessage(__('Error occurred while saving the store: %1', $e->getMessage()));
-            return $redirect->setPath('*/*/newstore');
+            $this->dataPersistor->set('storelocator_form', $data);
+
+            if ($storeId) {
+                return $redirect->setPath('*/*/edit', ['store_id' => $storeId]);
+            } else {
+                return $redirect->setPath('*/*/newstore');
+            }
         }
     }
+
 
     private function validateData($data): array
     {
