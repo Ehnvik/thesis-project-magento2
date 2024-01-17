@@ -35,15 +35,7 @@
         <settings>
             <label translate="true">Store Information</label>
         </settings>
-        <!-- ID field, not visible to the user -->
-        <field name="store_id" formElement="input">
-            <settings>
-                <dataType>text</dataType>
-                <visible>false</visible>
-                <dataScope>store_id</dataScope>
-            </settings>
-        </field>
-        <!-- Other fields similar to your original form, adjusted as necessary -->
+
         <field name="store_name" sortOrder="10" formElement="input">
             <settings>
                 <validation>
