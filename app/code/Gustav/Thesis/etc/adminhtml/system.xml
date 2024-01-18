@@ -2,7 +2,6 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
-        <!-- Create a new tab -->
         <tab id="gustav_tab" translate="label" sortOrder="1000">
             <label>Store Locator</label>
         </tab>
