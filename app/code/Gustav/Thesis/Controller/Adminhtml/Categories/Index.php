@@ -1,5 +1,6 @@
 <?php
-namespace Gustav\Thesis\Controller\Adminhtml\StoreLocator;
+
+namespace Gustav\Thesis\Controller\Adminhtml\Categories;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
@@ -8,16 +9,8 @@ use Magento\Framework\View\Result\PageFactory;
 
 class Index extends Action
 {
-    /**
-     * @var PageFactory
-     */
     protected PageFactory $resultPageFactory;
 
-    /**
-     *
-     * @param Context $context
-     * @param PageFactory $resultPageFactory
-     */
     public function __construct(
         Context $context,
         PageFactory $resultPageFactory
@@ -26,10 +19,6 @@ class Index extends Action
         $this->resultPageFactory = $resultPageFactory;
     }
 
-    /**
-     *
-     * @return ResultInterface
-     */
     public function execute(): ResultInterface
     {
         return $this->resultPageFactory->create();
@@ -37,6 +26,6 @@ class Index extends Action
 
     protected function _isAllowed(): bool
     {
-        return $this->_authorization->isAllowed('Gustav_Thesis::manage_stores');
+        return $this->_authorization->isAllowed('Gustav_Thesis::manage_categories');
     }
 }
