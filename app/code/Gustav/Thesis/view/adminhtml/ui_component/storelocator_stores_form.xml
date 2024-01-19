@@ -3,32 +3,32 @@
       xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">storelocator_form.storelocator_form_data_source</item>
+            <item name="provider" xsi:type="string">storelocator_stores_form.storelocator_stores_form_data_source</item>
         </item>
         <item name="label" xsi:type="string" translate="true">Store Information</item>
         <item name="template" xsi:type="string">templates/form/collapsible</item>
     </argument>
     <settings>
         <buttons>
-            <button name="save" class="Gustav\Thesis\Block\Adminhtml\StoreLocator\SaveButton"/>
-            <button name="delete" class="Gustav\Thesis\Block\Adminhtml\StoreLocator\DeleteButton"/>
-            <button name="back" class="Gustav\Thesis\Block\Adminhtml\StoreLocator\BackButton"/>
+            <button name="save" class="Gustav\Thesis\Block\Adminhtml\Stores\SaveButton"/>
+            <button name="delete" class="Gustav\Thesis\Block\Adminhtml\Stores\DeleteButton"/>
+            <button name="back" class="Gustav\Thesis\Block\Adminhtml\Stores\BackButton"/>
         </buttons>
-        <namespace>storelocator_form</namespace>
+        <namespace>storelocator_stores_form</namespace>
         <dataScope>data</dataScope>
         <deps>
-            <dep>storelocator_form.storelocator_form_data_source</dep>
+            <dep>storelocator_stores_form.storelocator_stores_form_data_source</dep>
         </deps>
     </settings>
-    <dataSource name="storelocator_form_data_source" component="Magento_Ui/js/form/provider">
+    <dataSource name="storelocator_stores_form_data_source" component="Magento_Ui/js/form/provider">
         <argument name="dataProvider" xsi:type="configurableObject">
-            <argument name="class" xsi:type="string">Gustav\Thesis\Model\DataProvider</argument>
-            <argument name="name" xsi:type="string">storelocator_form_data_source</argument>
+            <argument name="class" xsi:type="string">Gustav\Thesis\Model\Stores\DataProvider</argument>
+            <argument name="name" xsi:type="string">storelocator_stores_form_data_source</argument>
             <argument name="primaryFieldName" xsi:type="string">store_id</argument>
             <argument name="requestFieldName" xsi:type="string">store_id</argument>
         </argument>
         <settings>
-            <submitUrl path="storelocator/storelocator/save"/>
+            <submitUrl path="storelocator/stores/save"/>
         </settings>
     </dataSource>
     <fieldset name="store">

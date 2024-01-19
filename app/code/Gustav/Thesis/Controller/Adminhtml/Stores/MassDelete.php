@@ -1,25 +1,26 @@
 <?php
 
-namespace Gustav\Thesis\Controller\Adminhtml\StoreLocator;
+namespace Gustav\Thesis\Controller\Adminhtml\Stores;
 
+use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Ui\Component\MassAction\Filter;
-use Gustav\Thesis\Model\ResourceModel\StoreLocator\CollectionFactory as StoreLocatorCollectionFactory;
-use Gustav\Thesis\Model\ResourceModel\StoreLocator as StoreLocatorResource;
+use Gustav\Thesis\Model\ResourceModel\Stores\CollectionFactory as StoresCollectionFactory;
+use Gustav\Thesis\Model\ResourceModel\Stores as StoreResource;
 
-class MassDelete extends \Magento\Backend\App\Action
+class MassDelete extends Action
 {
     /**
-     * @var StoreLocatorCollectionFactory
+     * @var StoresCollectionFactory
      */
     protected $collectionFactory;
 
     /**
-     * @var StoreLocatorResource
+     * @var StoreResource
      */
-    protected $storeLocatorResource;
+    protected $storeResource;
 
     /**
      * @var Filter
@@ -29,19 +30,19 @@ class MassDelete extends \Magento\Backend\App\Action
     /**
      * MassDelete constructor.
      * @param Context $context
-     * @param StoreLocatorCollectionFactory $collectionFactory
-     * @param StoreLocatorResource $storeLocatorResource
+     * @param StoresCollectionFactory $collectionFactory
+     * @param StoreResource $storeResource
      * @param Filter $filter
      */
     public function __construct(
         Context                       $context,
-        StoreLocatorCollectionFactory $collectionFactory,
-        StoreLocatorResource          $storeLocatorResource,
+        StoresCollectionFactory $collectionFactory,
+        StoreResource          $storeResource,
         Filter                        $filter
     )
     {
         $this->collectionFactory = $collectionFactory;
-        $this->storeLocatorResource = $storeLocatorResource;
+        $this->storeResource = $storeResource;
         $this->filter = $filter;
         parent::__construct($context);
     }
@@ -56,8 +57,8 @@ class MassDelete extends \Magento\Backend\App\Action
             $collection = $this->filter->getCollection($this->collectionFactory->create());
             $storesDeleted = 0;
 
-            foreach ($collection->getItems() as $storeLocator) {
-                $this->storeLocatorResource->delete($storeLocator);
+            foreach ($collection->getItems() as $store) {
+                $this->storeResource->delete($store);
                 $storesDeleted++;
             }
 

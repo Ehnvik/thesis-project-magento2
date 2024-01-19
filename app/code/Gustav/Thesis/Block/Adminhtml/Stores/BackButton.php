@@ -1,6 +1,6 @@
 <?php
 
-namespace Gustav\Thesis\Block\Adminhtml\StoreLocator;
+namespace Gustav\Thesis\Block\Adminhtml\Stores;
 
 use Magento\Backend\Block\Widget\Context;
 use \Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;

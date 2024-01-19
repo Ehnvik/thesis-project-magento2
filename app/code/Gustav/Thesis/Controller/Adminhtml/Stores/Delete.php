@@ -1,25 +1,25 @@
 <?php
-namespace Gustav\Thesis\Controller\Adminhtml\StoreLocator;
+namespace Gustav\Thesis\Controller\Adminhtml\Stores;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\View\Result\PageFactory;
-use Gustav\Thesis\Model\StoreLocatorFactory;
-use Gustav\Thesis\Model\ResourceModel\StoreLocator as StoreLocatorResource;
+use Gustav\Thesis\Model\StoresFactory;
+use Gustav\Thesis\Model\ResourceModel\Stores as StoreResource;
 
 class Delete extends Action
 {
-    protected StoreLocatorFactory $storeLocatorFactory;
-    protected StoreLocatorResource $storeLocatorResource;
+    protected StoresFactory $storeFactory;
+    protected StoreResource $storeResource;
 
     public function __construct(
         Context $context,
-        StoreLocatorFactory $storeLocatorFactory,
-        StoreLocatorResource $storeLocatorResource
+        StoresFactory $storeFactory,
+        StoreResource $storeResource
     ) {
         parent::__construct($context);
-        $this->storeLocatorFactory = $storeLocatorFactory;
-        $this->storeLocatorResource = $storeLocatorResource;
+        $this->storeFactory = $storeFactory;
+        $this->storeResource = $storeResource;
     }
 
     public function execute()
@@ -33,11 +33,11 @@ class Delete extends Action
         }
 
         try {
-            $storeLocator = $this->storeLocatorFactory->create();
-            $this->storeLocatorResource->load($storeLocator, $storeId);
+            $store = $this->storeFactory->create();
+            $this->storeResource->load($store, $storeId);
 
-            if ($storeLocator->getId()) {
-                $this->storeLocatorResource->delete($storeLocator);
+            if ($store->getId()) {
+                $this->storeResource->delete($store);
                 $this->messageManager->addSuccessMessage(__('Store has been successfully deleted.'));
             } else {
                 $this->messageManager->addErrorMessage(__('Store could not be found.'));

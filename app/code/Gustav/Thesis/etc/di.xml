@@ -2,11 +2,11 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
 
-    <virtualType name="Gustav\Thesis\Model\ResourceModel\Grid\Collection\StoreLocator"
+    <virtualType name="Gustav\Thesis\Model\ResourceModel\Grid\Collection\Stores"
                  type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
             <argument name="mainTable" xsi:type="string">store_locator</argument>
-            <argument name="resourceModel" xsi:type="string">Gustav\Thesis\Model\ResourceModel\StoreLocator</argument>
+            <argument name="resourceModel" xsi:type="string">Gustav\Thesis\Model\ResourceModel\Stores</argument>
         </arguments>
     </virtualType>
 
@@ -20,15 +20,15 @@
 
     <virtualType name="GridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
         <arguments>
-            <argument name="collection" xsi:type="object" shared="false">Gustav\Thesis\Model\ResourceModel\Grid\Collection\StoreLocator</argument>
+            <argument name="collection" xsi:type="object" shared="false">Gustav\Thesis\Model\ResourceModel\Grid\Collection\Stores</argument>
         </arguments>
     </virtualType>
 
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
-                <item name="storelocator_listing_data_source" xsi:type="string">Gustav\Thesis\Model\ResourceModel\Grid\Collection\StoreLocator</item>
-                <item name="storelocator_form_data_source" xsi:type="string">Gustav\Thesis\Model\ResourceModel\Grid\Collection\StoreLocator</item>
+                <item name="storelocator_stores_listing_data_source" xsi:type="string">Gustav\Thesis\Model\ResourceModel\Grid\Collection\Stores</item>
+                <item name="storelocator_stores_form_data_source" xsi:type="string">Gustav\Thesis\Model\ResourceModel\Grid\Collection\Stores</item>
                 <item name="storelocator_categories_listing_data_source" xsi:type="string">Gustav\Thesis\Model\ResourceModel\Grid\Collection\Categories</item>
             </argument>
         </arguments>

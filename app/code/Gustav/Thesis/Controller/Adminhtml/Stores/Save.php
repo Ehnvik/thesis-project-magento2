@@ -1,31 +1,31 @@
 <?php
-namespace Gustav\Thesis\Controller\Adminhtml\StoreLocator;
+namespace Gustav\Thesis\Controller\Adminhtml\Stores;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\View\Result\PageFactory;
-use Gustav\Thesis\Model\StoreLocatorFactory;
-use Gustav\Thesis\Model\ResourceModel\StoreLocator as StoreLocatorResource;
+use Gustav\Thesis\Model\StoresFactory;
+use Gustav\Thesis\Model\ResourceModel\Stores as StoreResource;
 use Magento\Framework\App\Request\DataPersistor;
 
 class Save extends Action
 {
     protected PageFactory $resultPageFactory;
-    protected StoreLocatorFactory $storeLocatorFactory;
-    protected StoreLocatorResource $storeLocatorResource;
+    protected StoresFactory $storesFactory;
+    protected StoreResource $storeResource;
     protected DataPersistor $dataPersistor;
 
     public function __construct(
         Context $context,
         PageFactory $resultPageFactory,
-        StoreLocatorFactory $storeLocatorFactory,
-        StoreLocatorResource $storeLocatorResource,
+        StoresFactory $storesFactory,
+        StoreResource $storeResource,
         DataPersistor $dataPersistor
     ) {
         parent::__construct($context);
         $this->resultPageFactory = $resultPageFactory;
-        $this->storeLocatorFactory = $storeLocatorFactory;
-        $this->storeLocatorResource = $storeLocatorResource;
+        $this->storesFactory = $storesFactory;
+        $this->storeResource = $storeResource;
         $this->dataPersistor = $dataPersistor;
     }
 
@@ -67,7 +67,7 @@ class Save extends Action
                 $this->messageManager->addErrorMessage($error);
             }
 
-            $this->dataPersistor->set('storelocator_form', $data);
+            $this->dataPersistor->set('storelocator_stores_form', $data);
 
             if ($storeId) {
                 return $redirect->setPath('*/*/edit', ['store_id' => $storeId]);
@@ -77,16 +77,16 @@ class Save extends Action
         }
 
         try {
-            $storeLocator = $this->storeLocatorFactory->create();
+            $storeLocator = $this->storesFactory->create();
             $storeLocator->setData($data);
-            $this->storeLocatorResource->save($storeLocator);
+            $this->storeResource->save($storeLocator);
 
             $this->messageManager->addSuccessMessage(__('The store has been successfully saved.'));
-            $this->dataPersistor->clear('storelocator_form');
+            $this->dataPersistor->clear('storelocator_stores_form');
             return $redirect->setPath('*/*/edit', ['store_id' => $storeLocator->getId()]);
         } catch (\Exception $e) {
             $this->messageManager->addErrorMessage(__('Error occurred while saving the store: %1', $e->getMessage()));
-            $this->dataPersistor->set('storelocator_form', $data);
+            $this->dataPersistor->set('storelocator_stores_form', $data);
 
             if ($storeId) {
                 return $redirect->setPath('*/*/edit', ['store_id' => $storeId]);
