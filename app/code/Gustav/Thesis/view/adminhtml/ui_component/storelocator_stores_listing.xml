@@ -3,23 +3,23 @@
          xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">storelocator_storelocator_listing.storelocator_storelocator_listing_data_source</item>
-            <item name="deps" xsi:type="string">storelocator_storelocator_listing.storelocator_storelocator_listing_data_source</item>
+            <item name="provider" xsi:type="string">storelocator_stores_listing.storelocator_stores_listing_data_source</item>
+            <item name="deps" xsi:type="string">storelocator_stores_listing.storelocator_stores_listing_data_source</item>
         </item>
-        <item name="spinner" xsi:type="string">storelocator_storelocator_columns</item>
+        <item name="spinner" xsi:type="string">storelocator_stores_columns</item>
         <item name="buttons" xsi:type="array">
             <item name="add" xsi:type="array">
                 <item name="name" xsi:type="string">add</item>
                 <item name="label" xsi:type="string" translate="true">Add New Store</item>
                 <item name="class" xsi:type="string">primary</item>
-                <item name="url" xsi:type="string">storelocator/storelocator/newstore</item>
+                <item name="url" xsi:type="string">storelocator/stores/newstore</item>
             </item>
         </item>
     </argument>
-    <dataSource name="storelocator_storelocator_listing_data_source">
+    <dataSource name="storelocator_stores_listing_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
-            <argument name="class" xsi:type="string">Gustav\Thesis\Model\DataProvider</argument>
-            <argument name="name" xsi:type="string">storelocator_storelocator_listing_data_source</argument>
+            <argument name="class" xsi:type="string">Gustav\Thesis\Model\Stores\DataProvider</argument>
+            <argument name="name" xsi:type="string">storelocator_stores_listing_data_source</argument>
             <argument name="primaryFieldName" xsi:type="string">store_id</argument>
             <argument name="requestFieldName" xsi:type="string">store_id</argument>
             <argument name="data" xsi:type="array">
@@ -50,14 +50,14 @@
                         <message translate="true">Are you sure you want to delete selected stores?</message>
                         <title translate="true">Delete items</title>
                     </confirm>
-                    <url path="storelocator/storelocator/massDelete"/>
+                    <url path="storelocator/stores/massDelete"/>
                     <type>delete</type>
                     <label translate="true">Delete</label>
                 </settings>
             </action>
         </massaction>
     </listingToolbar>
-    <columns name="storelocator_storelocator_columns">
+    <columns name="storelocator_stores_columns">
         <selectionsColumn name="ids">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -91,7 +91,7 @@
         <actionsColumn name="actions" class="Magento\Theme\Ui\Component\Listing\Column\ViewAction">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="viewUrlPath" xsi:type="string">storelocator/storelocator/edit</item>
+                    <item name="viewUrlPath" xsi:type="string">storelocator/stores/edit</item>
                     <item name="urlEntityParamName" xsi:type="string">store_id</item>
                 </item>
             </argument>

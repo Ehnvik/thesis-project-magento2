@@ -1,9 +1,9 @@
 <?php
-namespace Gustav\Thesis\Model\ResourceModel\StoreLocator;
+namespace Gustav\Thesis\Model\ResourceModel\Stores;
 
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
-use Gustav\Thesis\Model\StoreLocator as Model;
-use Gustav\Thesis\Model\ResourceModel\StoreLocator as ResourceModel;
+use Gustav\Thesis\Model\Stores as Model;
+use Gustav\Thesis\Model\ResourceModel\Stores as ResourceModel;
 
 class Collection extends AbstractCollection
 {

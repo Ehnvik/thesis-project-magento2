@@ -1,9 +1,9 @@
 <?php
-namespace Gustav\Thesis\Model;
+namespace Gustav\Thesis\Model\Stores;
 
-use Gustav\Thesis\Model\ResourceModel\StoreLocator\CollectionFactory;
-use Magento\Ui\DataProvider\AbstractDataProvider;
+use Gustav\Thesis\Model\ResourceModel\Stores\CollectionFactory;
 use Magento\Framework\App\RequestInterface;
+use Magento\Ui\DataProvider\AbstractDataProvider;
 
 class DataProvider extends AbstractDataProvider
 {

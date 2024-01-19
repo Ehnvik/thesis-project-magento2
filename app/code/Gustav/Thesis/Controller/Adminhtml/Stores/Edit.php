@@ -1,28 +1,28 @@
 <?php
-namespace Gustav\Thesis\Controller\Adminhtml\StoreLocator;
+namespace Gustav\Thesis\Controller\Adminhtml\Stores;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\View\Result\PageFactory;
-use Gustav\Thesis\Model\StoreLocatorFactory;
-use Gustav\Thesis\Model\ResourceModel\StoreLocator as StoreLocatorResource;
+use Gustav\Thesis\Model\StoresFactory;
+use Gustav\Thesis\Model\ResourceModel\Stores as StoreResource;
 
 class Edit extends Action
 {
     protected $resultPageFactory;
-    protected $storeLocatorFactory;
-    protected $storeLocatorResource;
+    protected StoresFactory $storeFactory;
+    protected StoreResource $storeResource;
 
     public function __construct(
         Context $context,
         PageFactory $resultPageFactory,
-        StoreLocatorFactory $storeLocatorFactory,
-        StoreLocatorResource $storeLocatorResource
+        StoresFactory $storeFactory,
+        StoreResource $storeResource
     ) {
         parent::__construct($context);
         $this->resultPageFactory = $resultPageFactory;
-        $this->storeLocatorFactory = $storeLocatorFactory;
-        $this->storeLocatorResource = $storeLocatorResource;
+        $this->storeFactory = $storeFactory;
+        $this->storeResource = $storeResource;
     }
 
     public function execute()
@@ -32,15 +32,15 @@ class Edit extends Action
         $title = $resultPage->getConfig()->getTitle();
 
         if ($storeId) {
-            $storeLocator = $this->storeLocatorFactory->create();
-            $this->storeLocatorResource->load($storeLocator, $storeId);
+            $store = $this->storeFactory->create();
+            $this->storeResource->load($store, $storeId);
 
-            if (!$storeLocator->getId()) {
+            if (!$store->getId()) {
                 $this->messageManager->addErrorMessage(__('This store no longer exists.'));
                 return $this->resultRedirectFactory->create()->setPath('*/*/');
             }
 
-            $title->prepend(__($storeLocator->getStoreName()));
+            $title->prepend(__($store->getStoreName()));
         } else {
             $title->set(__('New Store'));
         }

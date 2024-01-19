@@ -2,9 +2,9 @@
 namespace Gustav\Thesis\Model;
 
 use Magento\Framework\Model\AbstractModel;
-use Gustav\Thesis\Model\ResourceModel\StoreLocator as ResourceModel;
+use Gustav\Thesis\Model\ResourceModel\Stores as ResourceModel;
 
-class StoreLocator extends AbstractModel
+class Stores extends AbstractModel
 {
     /**
      * Initialize resource model

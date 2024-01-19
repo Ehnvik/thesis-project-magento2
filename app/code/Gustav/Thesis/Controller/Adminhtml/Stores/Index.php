@@ -1,5 +1,5 @@
 <?php
-namespace Gustav\Thesis\Controller\Adminhtml\StoreLocator;
+namespace Gustav\Thesis\Controller\Adminhtml\Stores;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;

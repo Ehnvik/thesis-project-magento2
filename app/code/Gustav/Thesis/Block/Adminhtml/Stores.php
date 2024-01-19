@@ -1,7 +1,7 @@
 <?php
 namespace Gustav\Thesis\Block\Adminhtml;
 
-class StoreLocator
+class Stores
 {
     // Add data that handles your grid
 
