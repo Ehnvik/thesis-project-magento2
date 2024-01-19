@@ -9,11 +9,11 @@
         <item name="template" xsi:type="string">templates/form/collapsible</item>
     </argument>
     <settings>
-<!--        <buttons>-->
-<!--            <button name="save" class="Gustav\Thesis\Block\Adminhtml\Categories\SaveButton"/>-->
+        <buttons>
+            <button name="save" class="Gustav\Thesis\Block\Adminhtml\Categories\SaveButton"/>
 <!--            <button name="delete" class="Gustav\Thesis\Block\Adminhtml\Categories\DeleteButton"/>-->
 <!--            <button name="back" class="Gustav\Thesis\Block\Adminhtml\Categories\BackButton"/>-->
-<!--        </buttons>-->
+        </buttons>
         <namespace>storelocator_categories_form</namespace>
         <dataScope>data</dataScope>
         <deps>
