@@ -77,13 +77,13 @@ class Save extends Action
         }
 
         try {
-            $storeLocator = $this->storesFactory->create();
-            $storeLocator->setData($data);
-            $this->storeResource->save($storeLocator);
+            $store = $this->storesFactory->create();
+            $store->setData($data);
+            $this->storeResource->save($store);
 
             $this->messageManager->addSuccessMessage(__('The store has been successfully saved.'));
             $this->dataPersistor->clear('storelocator_stores_form');
-            return $redirect->setPath('*/*/edit', ['store_id' => $storeLocator->getId()]);
+            return $redirect->setPath('*/*/edit', ['store_id' => $store->getId()]);
         } catch (\Exception $e) {
             $this->messageManager->addErrorMessage(__('Error occurred while saving the store: %1', $e->getMessage()));
             $this->dataPersistor->set('storelocator_stores_form', $data);
