@@ -11,12 +11,12 @@ class DataProvider extends AbstractDataProvider
     /**
      * @var RequestInterface
      */
-    private RequestInterface $request;
+    private $request;
 
     /**
      * @var array
      */
-    protected array $loadedData = [];
+    protected $loadedData;
 
     /**
      * @param string $name
