@@ -84,17 +84,17 @@
                 </item>
             </argument>
         </column>
-<!--        <actionsColumn >-->
-<!--            <argument name="data" xsi:type="array">-->
-<!--                <item name="config" xsi:type="array">-->
-<!--                    <item name="viewUrlPath" xsi:type="string">storelocator/categories/edit</item>-->
-<!--                    <item name="urlEntityParamName" xsi:type="string">category_id</item>-->
-<!--                </item>-->
-<!--            </argument>-->
-<!--            <settings>-->
-<!--                <indexField>category_id</indexField>-->
-<!--            </settings>-->
-<!--        </actionsColumn>-->
+        <actionsColumn name="actions" class="Magento\Theme\Ui\Component\Listing\Column\ViewAction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="viewUrlPath" xsi:type="string">storelocator/categories/edit</item>
+                    <item name="urlEntityParamName" xsi:type="string">category_id</item>
+                </item>
+            </argument>
+            <settings>
+                <indexField>category_id</indexField>
+            </settings>
+        </actionsColumn>
     </columns>
 
 </listing>
