@@ -12,7 +12,7 @@
         <buttons>
             <button name="save" class="Gustav\Thesis\Block\Adminhtml\Categories\SaveButton"/>
             <button name="delete" class="Gustav\Thesis\Block\Adminhtml\Categories\DeleteButton"/>
-<!--            <button name="back" class="Gustav\Thesis\Block\Adminhtml\Categories\BackButton"/>-->
+            <button name="back" class="Gustav\Thesis\Block\Adminhtml\Categories\BackButton"/>
         </buttons>
         <namespace>storelocator_categories_form</namespace>
         <dataScope>data</dataScope>
