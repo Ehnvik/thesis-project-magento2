@@ -1,0 +1,17 @@
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+
+
+<?php
+$stores = $block->getStores();
+?>
+<div class="store-locator">
+    <h1>Hello Stores!</h1>
+    <?php foreach ($stores as $store): ?>
+        <div class="store">
+            <h3><?= $block->escapeHtml($store->getStoreName()) ?></h3>
+        </div>
+    <?php endforeach; ?>
+</div>
