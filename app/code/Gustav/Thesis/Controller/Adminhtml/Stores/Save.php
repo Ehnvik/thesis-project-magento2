@@ -89,7 +89,7 @@ class Save extends Action
             $store->setData($data);
             $this->storeResource->save($store);
 
-            $selectedCategories = $this->getRequest()->getParam('category_ids', []);
+            $selectedCategories = (array) $this->getRequest()->getParam('category_ids', []);
 
             $this->saveStoreCategoryRelations($store->getId(), $selectedCategories);
 
