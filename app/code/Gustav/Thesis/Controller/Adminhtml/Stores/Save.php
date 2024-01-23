@@ -7,6 +7,8 @@ use Magento\Framework\View\Result\PageFactory;
 use Gustav\Thesis\Model\StoresFactory;
 use Gustav\Thesis\Model\ResourceModel\Stores as StoreResource;
 use Magento\Framework\App\Request\DataPersistor;
+ use Gustav\Thesis\Model\ResourceModel\CategoriesRelation as CategoryRelationResource;
+ use Gustav\Thesis\Model\CategoriesRelationFactory;
 
 class Save extends Action
 {
@@ -14,19 +16,25 @@ class Save extends Action
     protected StoresFactory $storesFactory;
     protected StoreResource $storeResource;
     protected DataPersistor $dataPersistor;
+     protected CategoriesRelationFactory $categoriesRelationFactory;
+     protected CategoryRelationResource $categoryRelationResource;
 
     public function __construct(
         Context $context,
         PageFactory $resultPageFactory,
         StoresFactory $storesFactory,
         StoreResource $storeResource,
-        DataPersistor $dataPersistor
+        DataPersistor $dataPersistor,
+        CategoriesRelationFactory $categoriesRelationFactory,
+         CategoryRelationResource $categoryRelationResource
     ) {
         parent::__construct($context);
         $this->resultPageFactory = $resultPageFactory;
         $this->storesFactory = $storesFactory;
         $this->storeResource = $storeResource;
         $this->dataPersistor = $dataPersistor;
+         $this->categoriesRelationFactory = $categoriesRelationFactory;
+         $this->categoryRelationResource = $categoryRelationResource;
     }
 
     public function execute()
@@ -81,6 +89,10 @@ class Save extends Action
             $store->setData($data);
             $this->storeResource->save($store);
 
+            $selectedCategories = $this->getRequest()->getParam('category_ids', []);
+
+            $this->saveStoreCategoryRelations($store->getId(), $selectedCategories);
+
             $this->messageManager->addSuccessMessage(__('The store has been successfully saved.'));
             $this->dataPersistor->clear('storelocator_stores_form');
             return $redirect->setPath('*/*/edit', ['store_id' => $store->getId()]);
@@ -93,6 +105,20 @@ class Save extends Action
             } else {
                 return $redirect->setPath('*/*/newstore');
             }
+        }
+    }
+
+    private function saveStoreCategoryRelations($storeId, array $categoryIds): void
+    {
+        $this->categoryRelationResource->deleteByStoreId($storeId);
+
+        foreach ($categoryIds as $categoryId) {
+            $relation = $this->categoriesRelationFactory->create();
+            $relation->setData([
+                'store_id' => $storeId,
+                'category_id' => $categoryId
+            ]);
+            $this->categoryRelationResource->saveRelation($storeId, $categoryId);
         }
     }
 
