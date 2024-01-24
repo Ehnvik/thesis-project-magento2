@@ -19,6 +19,11 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
 
+                <field id="google_maps_api_key" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Google Maps API Key</label>
+                    <comment><![CDATA[Enter your Google Maps API Key here.]]></comment>
+                </field>
+
             </group>
         </section>
     </system>
