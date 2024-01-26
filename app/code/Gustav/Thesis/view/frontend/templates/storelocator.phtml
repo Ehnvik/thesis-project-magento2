@@ -5,13 +5,17 @@
 
 
 <?php
-$stores = $block->getStores();
+$storeListBlock = $block->getChildBlock('store.list');
+$storeMapBlock = $block->getChildBlock('store.map');
 ?>
-<div class="store-locator">
-    <h1>Hello Stores!</h1>
-    <?php foreach ($stores as $store): ?>
-        <div class="store">
-            <h3><?= $block->escapeHtml($store->getStoreName()) ?></h3>
-        </div>
-    <?php endforeach; ?>
+
+<div class="store-locator-main">
+    <?php if ($storeListBlock) : ?>
+        <?= $storeListBlock->toHtml() ?>
+    <?php endif; ?>
+
+    <?php if ($storeMapBlock) : ?>
+        <?= $storeMapBlock->toHtml() ?>
+    <?php endif; ?>
 </div>
+
