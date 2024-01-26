@@ -16,11 +16,17 @@
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .storelocator-frontend-index {
-        .store-locator-main {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
+        .column main {
+            width: 100%;
+
+            .store-locator-main {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                width: 100%;
+            }
         }
+
     }
 
 }

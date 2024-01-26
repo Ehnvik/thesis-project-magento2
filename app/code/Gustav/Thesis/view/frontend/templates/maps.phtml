@@ -30,8 +30,9 @@ foreach ($stores as $store) {
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<?= $escaper->escapeUrl($apiKey) ?>&callback=initMap" async defer></script>
 
-<div id="map" style="height: 500px; width: 100%;"></div>
-
+<div class="map-container">
+<div class="map" id="map" style="height: 500px; width: 100%;"></div>
+</div>
 
 <script type="text/javascript">
     require([
