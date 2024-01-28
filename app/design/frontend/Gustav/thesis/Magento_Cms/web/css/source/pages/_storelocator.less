@@ -5,7 +5,20 @@
 
 & when (@media-common = true) {
     .storelocator-frontend-index {
+        .column.main {
+            width: 100%;
 
+            .store-locator-main {
+                .store-locator {
+                }
+
+                .map {
+                    max-width: 500px;
+                    height: 500px;
+
+                }
+            }
+        }
     }
 }
 
@@ -14,19 +27,43 @@
 //  Desktop
 //  _____________________________________________
 
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .storelocator-frontend-index {
+    }
+}
+
+
+
+
+//
+//  Desktop
+//  _____________________________________________
+
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .storelocator-frontend-index {
-        .column main {
+        .column.main {
             width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
 
             .store-locator-main {
                 display: flex;
                 flex-direction: row;
                 justify-content: space-around;
-                width: 100%;
+                width: 80%;
+
+                .store-locator {
+                    width: 50%;
+                }
+
+                .map {
+                    max-width: 500px;
+                    height: 500px;
+                    margin-left: auto;
+                    flex: 1;
+                }
             }
         }
-
     }
-
 }
