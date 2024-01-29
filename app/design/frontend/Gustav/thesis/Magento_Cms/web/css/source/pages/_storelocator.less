@@ -5,34 +5,68 @@
 
 & when (@media-common = true) {
     .storelocator-frontend-index {
+        font-family: @font-family__nunito;
+
         .column.main {
             width: 100%;
 
-            .store-locator-main {
-                .store-locator {
+                .map {
+                    height: 350px;
                 }
 
-                .map {
-                    max-width: 500px;
-                    height: 500px;
+                .store-locator-main {
+                    display: flex;
+                    flex-direction: column-reverse;
+                    width: 100%;
 
+                    .store-locator-wrapper {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: center;
+                        margin-top: 15px;
+
+                        .store-locator {
+                            width: 90%;
+
+                            .filter-reset-container {
+                                display: flex;
+                                flex-direction: row;
+                                justify-content: flex-start;
+                                align-items: center;
+                                gap: 10px;
+                                margin-bottom: 10px;
+
+                                .category-filter-container {
+                                    .category-filter {
+                                        border: none;
+                                        border-radius: 4px;
+                                        height: 36px;
+                                        background-color: @color-storelocator-blue;
+                                        color: @color-general-white;
+                                        font-family: @font-family__nunito;
+                                        font-weight: @font-weight__bold;
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
     }
-}
 
 
 //
-//  Desktop
+//  Mobile
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     .storelocator-frontend-index {
+        .page-main {
+            padding: 0;
+        }
     }
 }
-
-
 
 
 //

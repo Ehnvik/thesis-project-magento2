@@ -17,7 +17,7 @@ define(['jquery', 'mage/url'], function ($, urlBuilder) {
         _bindEvents: function () {
             const self = this;
 
-            $('.reset-filter-button').on('click', function () {
+            $('.reset-button').on('click', function () {
                 $('.category-filter').val('');
                 $('.store-search-input').val('');
                 self.options.currentPage = 1;

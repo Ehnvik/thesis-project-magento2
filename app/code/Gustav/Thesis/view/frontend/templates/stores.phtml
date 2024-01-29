@@ -5,11 +5,13 @@
 
 $categories = $block->getCategories();
 ?>
+<div class="store-locator-wrapper">
 <div class="store-locator">
-    <div>
-        <button class="reset-filter-button">Reset</button>
+    <div class="filter-reset-container">
+    <div class="reset-button-container">
+        <button class="reset-button action-primary">Reset</button>
     </div>
-<div class="store-filters">
+<div class="category-filter-container">
     <select class="category-filter">
         <option value="">All Categories</option>
         <?php foreach ($categories as $category): ?>
@@ -19,10 +21,12 @@ $categories = $block->getCategories();
         <?php endforeach; ?>
     </select>
 </div>
-    <div class="store-search">
+    </div>
+    <div class="store-search-container">
         <input type="text" class="store-search-input" placeholder="Search store...">
     </div>
     <div class="js-store-list"></div>
+</div>
 </div>
 
 <script type="text/x-magento-init">
