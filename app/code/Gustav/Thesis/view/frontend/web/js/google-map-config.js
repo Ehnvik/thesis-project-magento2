@@ -6,6 +6,7 @@ define(['jquery', 'jquery-ui-modules/widget'], function ($) {
             map: null,
             mapCenterLatitude: 59.3293,
             mapCenterLongitude: 18.0686,
+            markers: [],
         },
 
         _create: function () {
@@ -33,7 +34,7 @@ define(['jquery', 'jquery-ui-modules/widget'], function ($) {
             const self = this;
 
             $(document).on('storeListUpdated', function (event, stores) {
-                console.log('Markers stores: ', stores);
+                console.log(event, stores);
                 self._updateMarkers(stores);
             });
         },
@@ -41,6 +42,10 @@ define(['jquery', 'jquery-ui-modules/widget'], function ($) {
         _updateMarkers: function (stores) {
             const self = this;
 
+            self.options.markers.forEach(function (marker) {
+                marker.setMap(null);
+            });
+            self.options.markers = [];
             stores.forEach(function (store) {
                 const marker = new google.maps.Marker({
                     position: new google.maps.LatLng(
@@ -62,8 +67,15 @@ define(['jquery', 'jquery-ui-modules/widget'], function ($) {
                 });
 
                 marker.addListener('click', function () {
+                    if (self.options.currentInfowindow) {
+                        self.options.currentInfowindow.close();
+                    }
+
                     infowindow.open(self.map, marker);
+                    self.options.currentInfowindow = infowindow;
                 });
+
+                self.options.markers.push(marker);
             });
         },
     });

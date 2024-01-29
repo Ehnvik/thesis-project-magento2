@@ -3,7 +3,7 @@ define(['jquery', 'mage/url'], function ($, urlBuilder) {
 
     $.widget('gustav.storeList', {
         options: {
-            actionUrl: '/storelocator/frontend/storelist',
+            actionUrl: '',
             currentPage: 1,
             pageSize: 5,
         },
@@ -28,7 +28,6 @@ define(['jquery', 'mage/url'], function ($, urlBuilder) {
                 const categoryId = $(this).val();
 
                 self._loadStores(self.options.currentPage, categoryId);
-                $(document).trigger('categoryFilterChanged', [categoryId]);
             });
         },
 
@@ -48,9 +47,12 @@ define(['jquery', 'mage/url'], function ($, urlBuilder) {
                     self.options.currentPage = page;
                     self._renderStores(response.stores);
                     self._renderPagination(response.total_count, page);
+                    $(document).trigger('storeListUpdated', [response.stores]);
                 },
                 error: function (error) {
-                    console.error('Error loading stores: ' + error.message);
+                    $('.js-store-list').text(
+                        'Error loading stores: ' + error.message
+                    );
                 },
             });
         },

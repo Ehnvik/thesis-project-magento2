@@ -3,24 +3,6 @@
 /** @var \Magento\Framework\Escaper $escaper */
 /** @var \Gustav\Thesis\Block\Frontend\Maps $block */
 $apiKey = $block->getGoogleMapApiKey();
-$stores = $block->getStores();
-?>
-
-<?php
-$preparedStores = [];
-foreach ($stores as $store) {
-    $preparedStores[] = [
-        'name' => $store->getStoreName(),
-        'address' => $store->getAddress(),
-        'city' => $store->getCity(),
-        'postcode' => $store->getPostcode(),
-        'country' => $store->getCountry(),
-        'phone' => $store->getPhone(),
-        'hours' => $store->getHours(),
-        'latitude' => $store->getLatitude(),
-        'longitude' => $store->getLongitude(),
-    ];
-}
 ?>
 
 <script type="text/javascript">
@@ -37,8 +19,6 @@ foreach ($stores as $store) {
         'jquery',
         'googleMapConfig'
     ], function ($) {
-        $('#map').googleMapConfig({
-            stores: <?php echo json_encode($preparedStores); ?>,
-        });
+        $('#map').googleMapConfig({});
     });
 </script>

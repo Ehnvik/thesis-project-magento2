@@ -49,6 +49,13 @@ class StoreList implements HttpGetActionInterface
             $stores[] = [
                 'name' => $store->getStoreName(),
                 'address' => $store->getAddress(),
+                'city' => $store->getCity(),
+                'postcode' => $store->getPostcode(),
+                'country' => $store->getCountry(),
+                'phone' => $store->getPhone(),
+                'hours' => $store->getHours(),
+                'latitude' => $store->getLatitude(),
+                'longitude' => $store->getLongitude(),
             ];
         }
 
