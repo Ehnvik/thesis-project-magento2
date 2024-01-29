@@ -6,7 +6,8 @@ define(['jquery', 'jquery-ui-modules/widget'], function ($) {
             map: null,
             mapCenterLatitude: 59.3293,
             mapCenterLongitude: 18.0686,
-            markers: [],
+            markers: {},
+            currentInfowindow: null,
         },
 
         _create: function () {
@@ -36,15 +37,28 @@ define(['jquery', 'jquery-ui-modules/widget'], function ($) {
             $(document).on('storeListUpdated', function (event, stores) {
                 self._updateMarkers(stores);
             });
+
+            $(document).on('storeSelected', function (event, storeId) {
+                if (self.options.markers[storeId]) {
+                    const marker = self.options.markers[storeId];
+
+                    if (self.options.currentInfowindow) {
+                        self.options.currentInfowindow.close();
+                    }
+                    marker.infowindow.open(self.map, marker);
+                    self.options.currentInfowindow = marker.infowindow;
+                }
+            });
         },
 
         _updateMarkers: function (stores) {
             const self = this;
 
-            self.options.markers.forEach(function (marker) {
+            Object.values(self.options.markers).forEach(function (marker) {
                 marker.setMap(null);
             });
-            self.options.markers = [];
+            self.options.markers = {};
+
             stores.forEach(function (store) {
                 const marker = new google.maps.Marker({
                     position: new google.maps.LatLng(
@@ -69,12 +83,12 @@ define(['jquery', 'jquery-ui-modules/widget'], function ($) {
                     if (self.options.currentInfowindow) {
                         self.options.currentInfowindow.close();
                     }
-
                     infowindow.open(self.map, marker);
                     self.options.currentInfowindow = infowindow;
                 });
 
-                self.options.markers.push(marker);
+                self.options.markers[store.id] = marker;
+                marker.infowindow = infowindow;
             });
         },
     });

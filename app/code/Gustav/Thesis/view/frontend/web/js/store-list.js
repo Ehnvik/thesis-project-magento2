@@ -45,9 +45,11 @@ define(['jquery', 'mage/url'], function ($, urlBuilder) {
                 let searchTerm = $(this).val();
 
                 self.options.currentPage = 1;
+
                 if (searchTerm.length < 3 && searchTerm.length > 0) {
                     return;
                 }
+
                 self._loadStores(
                     self.options.currentPage,
                     self.options.currentCategory,
@@ -87,11 +89,20 @@ define(['jquery', 'mage/url'], function ($, urlBuilder) {
             let html = '<ul>';
 
             stores.forEach(function (store) {
-                html += `<li>Name: ${store.name}</li>`;
+                html += `<li class="store-item" data-store-id="${store.id}">Name: ${store.name}</li>`;
             });
 
             html += '</ul>';
             this.element.html(html);
+            this._addStoreClickListeners();
+        },
+
+        _addStoreClickListeners: function () {
+            this.element.find('.store-item').on('click', function () {
+                const storeId = $(this).data('store-id');
+
+                $(document).trigger('storeSelected', storeId);
+            });
         },
 
         _renderPagination: function (totalCount, currentPage) {

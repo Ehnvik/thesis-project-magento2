@@ -52,6 +52,7 @@ class StoreList implements HttpGetActionInterface
         $stores = [];
         foreach ($collection as $store) {
             $stores[] = [
+                'id' => $store->getStoreId(),
                 'name' => $store->getStoreName(),
                 'address' => $store->getAddress(),
                 'city' => $store->getCity(),
