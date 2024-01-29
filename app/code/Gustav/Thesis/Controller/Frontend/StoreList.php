@@ -33,12 +33,17 @@ class StoreList implements HttpGetActionInterface
         $page = (int) $this->request->getParam('page', 1);
         $pageSize = 5;
         $categoryId = $this->request->getParam('category');
+        $searchQuery = $this->request->getParam('search', '');
 
         $collection = $this->collectionFactory->create();
 
         if ($categoryId) {
             $storeIds = $this->categoriesRelation->getStoreIdsByCategoryId($categoryId);
             $collection->addFieldToFilter('store_id', ['in' => $storeIds]);
+        }
+
+        if (!empty($searchQuery)) {
+            $collection->addFieldToFilter('store_name', ['like' => '%' . $searchQuery . '%']);
         }
 
         $collection->setPageSize($pageSize);

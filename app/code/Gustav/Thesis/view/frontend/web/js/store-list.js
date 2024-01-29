@@ -3,9 +3,10 @@ define(['jquery', 'mage/url'], function ($, urlBuilder) {
 
     $.widget('gustav.storeList', {
         options: {
-            actionUrl: '',
+            actionUrl: '/storelocator/frontend/storelist',
             currentPage: 1,
             pageSize: 5,
+            currentCategory: '',
         },
 
         _create: function () {
@@ -16,6 +17,14 @@ define(['jquery', 'mage/url'], function ($, urlBuilder) {
         _bindEvents: function () {
             const self = this;
 
+            $('.reset-filter-button').on('click', function () {
+                $('.category-filter').val('');
+                $('.store-search-input').val('');
+                self.options.currentPage = 1;
+                self.options.currentCategory = '';
+                self._loadStores(self.options.currentPage);
+            });
+
             this.element.on('click', '.pagination a', function (event) {
                 event.preventDefault();
                 const page = $(this).data('page');
@@ -25,13 +34,29 @@ define(['jquery', 'mage/url'], function ($, urlBuilder) {
 
             $(document).on('change', '.category-filter', function () {
                 self.options.currentPage = 1;
-                const categoryId = $(this).val();
+                self.options.currentCategory = $(this).val();
+                self._loadStores(
+                    self.options.currentPage,
+                    self.options.currentCategory
+                );
+            });
 
-                self._loadStores(self.options.currentPage, categoryId);
+            $(document).on('input', '.store-search-input', function () {
+                let searchTerm = $(this).val();
+
+                self.options.currentPage = 1;
+                if (searchTerm.length < 3 && searchTerm.length > 0) {
+                    return;
+                }
+                self._loadStores(
+                    self.options.currentPage,
+                    self.options.currentCategory,
+                    searchTerm
+                );
             });
         },
 
-        _loadStores: function (page, categoryId = '') {
+        _loadStores: function (page, categoryId = '', searchQuery = '') {
             const self = this;
 
             $.ajax({
@@ -41,6 +66,7 @@ define(['jquery', 'mage/url'], function ($, urlBuilder) {
                     page: page,
                     limit: this.options.pageSize,
                     category: categoryId,
+                    search: searchQuery,
                 },
                 dataType: 'json',
                 success: function (response) {

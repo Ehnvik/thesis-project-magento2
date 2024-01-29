@@ -6,6 +6,9 @@
 $categories = $block->getCategories();
 ?>
 <div class="store-locator">
+    <div>
+        <button class="reset-filter-button">Reset</button>
+    </div>
 <div class="store-filters">
     <select class="category-filter">
         <option value="">All Categories</option>
@@ -16,8 +19,11 @@ $categories = $block->getCategories();
         <?php endforeach; ?>
     </select>
 </div>
-
-<div class="js-store-list"></div>
+    <div class="store-search">
+        <input type="text" class="store-search-input" placeholder="Search store...">
+        <button class="store-search-button">Search</button>
+    </div>
+    <div class="js-store-list"></div>
 </div>
 
 <script type="text/x-magento-init">

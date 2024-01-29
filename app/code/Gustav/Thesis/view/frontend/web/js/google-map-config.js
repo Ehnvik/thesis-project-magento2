@@ -34,7 +34,6 @@ define(['jquery', 'jquery-ui-modules/widget'], function ($) {
             const self = this;
 
             $(document).on('storeListUpdated', function (event, stores) {
-                console.log(event, stores);
                 self._updateMarkers(stores);
             });
         },
