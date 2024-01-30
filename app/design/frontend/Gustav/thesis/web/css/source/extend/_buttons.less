@@ -1,0 +1,27 @@
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    button,
+    .action.primary,
+    .action-primary,
+    .action .a.action.primary{
+        border: none;
+        border-radius: 4px;
+        padding: 10px 15px;
+    }
+}
+
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    button,
+    .action.primary,
+    .action-primary {
+        transition: @button__transition;
+    }
+}

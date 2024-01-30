@@ -4,13 +4,15 @@ define(['jquery', 'jquery-ui-modules/widget'], function ($) {
     $.widget('gustav.googleMapConfig', {
         options: {
             map: null,
-            stores: [],
             mapCenterLatitude: 59.3293,
             mapCenterLongitude: 18.0686,
+            markers: {},
+            currentInfowindow: null,
         },
 
         _create: function () {
             this.initMap();
+            this._bindEvents();
         },
 
         initMap: function () {
@@ -27,14 +29,37 @@ define(['jquery', 'jquery-ui-modules/widget'], function ($) {
                 document.getElementById('map'),
                 mapOptions
             );
-
-            self.generateMarkers();
         },
 
-        generateMarkers: function () {
+        _bindEvents: function () {
             const self = this;
 
-            $.each(self.options.stores, function (index, store) {
+            $(document).on('storeListUpdated', function (event, stores) {
+                self._updateMarkers(stores);
+            });
+
+            $(document).on('storeSelected', function (event, storeId) {
+                if (self.options.markers[storeId]) {
+                    const marker = self.options.markers[storeId];
+
+                    if (self.options.currentInfowindow) {
+                        self.options.currentInfowindow.close();
+                    }
+                    marker.infowindow.open(self.map, marker);
+                    self.options.currentInfowindow = marker.infowindow;
+                }
+            });
+        },
+
+        _updateMarkers: function (stores) {
+            const self = this;
+
+            Object.values(self.options.markers).forEach(function (marker) {
+                marker.setMap(null);
+            });
+            self.options.markers = {};
+
+            stores.forEach(function (store) {
                 const marker = new google.maps.Marker({
                     position: new google.maps.LatLng(
                         store.latitude,
@@ -44,32 +69,36 @@ define(['jquery', 'jquery-ui-modules/widget'], function ($) {
                     title: store.name,
                 });
 
-                marker.addListener('click', function () {
-                    const infowindowContent =
-                        '<div><strong>' +
-                        store.name +
-                        '</strong><br>' +
-                        'Address: ' +
-                        store.address +
-                        ',<br> ' +
-                        store.city +
-                        ', ' +
-                        store.postcode +
-                        ', ' +
-                        store.country +
-                        '<br>' +
-                        'Phone: ' +
-                        store.phone +
-                        '<br>' +
-                        'Open: ' +
-                        store.hours +
-                        '</div>';
-                    const infowindow = new google.maps.InfoWindow({
-                        content: infowindowContent,
-                    });
+                const formattedPhone = store.phone.replace(/^(08)/, '$1-');
 
-                    infowindow.open(self.map, marker);
+                const infowindowContent = `
+                    <div class="info-window-container">
+                        <h3 class="info-window-name">${store.name}</h3>
+                        <p class="info-window-address">${store.address}</p>
+                        <div class="info-window-location">
+                            <span class="location-city">${store.city},</span>
+                            <span class="location-postcode">${store.postcode},</span>
+                            <span class="location-country">${store.country}</span>
+                        </div>
+                        <div class="info-window-contact">
+                            <p class="contact-hours">${store.hours}</p>
+                            <p class="contact-phone">${formattedPhone}</p>
+                        </div>
+                    </div>`;
+                const infowindow = new google.maps.InfoWindow({
+                    content: infowindowContent,
                 });
+
+                marker.addListener('click', function () {
+                    if (self.options.currentInfowindow) {
+                        self.options.currentInfowindow.close();
+                    }
+                    infowindow.open(self.map, marker);
+                    self.options.currentInfowindow = infowindow;
+                });
+
+                self.options.markers[store.id] = marker;
+                marker.infowindow = infowindow;
             });
         },
     });

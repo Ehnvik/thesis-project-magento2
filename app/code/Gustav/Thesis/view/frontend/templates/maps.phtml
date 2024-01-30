@@ -3,24 +3,6 @@
 /** @var \Magento\Framework\Escaper $escaper */
 /** @var \Gustav\Thesis\Block\Frontend\Maps $block */
 $apiKey = $block->getGoogleMapApiKey();
-$stores = $block->getStores();
-?>
-
-<?php
-$preparedStores = [];
-foreach ($stores as $store) {
-    $preparedStores[] = [
-        'name' => $store->getStoreName(),
-        'address' => $store->getAddress(),
-        'city' => $store->getCity(),
-        'postcode' => $store->getPostcode(),
-        'country' => $store->getCountry(),
-        'phone' => $store->getPhone(),
-        'hours' => $store->getHours(),
-        'latitude' => $store->getLatitude(),
-        'longitude' => $store->getLongitude(),
-    ];
-}
 ?>
 
 <script type="text/javascript">
@@ -30,17 +12,13 @@ foreach ($stores as $store) {
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<?= $escaper->escapeUrl($apiKey) ?>&callback=initMap" async defer></script>
 
-<div class="map-container">
-<div class="map" id="map" style="height: 500px; width: 100%;"></div>
-</div>
+<div class="map" id="map"></div>
 
 <script type="text/javascript">
     require([
         'jquery',
         'googleMapConfig'
     ], function ($) {
-        $('#map').googleMapConfig({
-            stores: <?php echo json_encode($preparedStores); ?>,
-        });
+        $('#map').googleMapConfig({});
     });
 </script>

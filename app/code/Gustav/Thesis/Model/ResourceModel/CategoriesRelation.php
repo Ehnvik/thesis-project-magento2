@@ -10,6 +10,16 @@ class CategoriesRelation extends AbstractDb
         $this->_init('store_category_relation', null);
     }
 
+    public function getStoreIdsByCategoryId($categoryId): array
+    {
+        $connection = $this->getConnection();
+        $select = $connection->select()
+            ->from($this->getMainTable(), 'store_id')
+            ->where('category_id = ?', $categoryId);
+
+        return $connection->fetchCol($select);
+    }
+
     public function deleteByStoreId($storeId): void
     {
         $connection = $this->getConnection();

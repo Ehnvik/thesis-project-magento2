@@ -5,7 +5,7 @@
 & when (@media-common = true) {
     .header {
         max-width: none !important;
-        background-color: @color-storelocator-header;
+        background-color: @color-storelocator-blue;
 
         .nav-toggle::before,
         .action .nav-toggle {
@@ -16,13 +16,16 @@
 
 
 //
-//  Common
+//  Mobile
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
-    .header {
-        .logo {
-            margin: 0 0 10px;
+        .page-header {
+            margin-bottom: 0;
+            border-bottom: 0;
+
+            .logo {
+                margin: 0 0 10px;
+            }
         }
-    }
 }
