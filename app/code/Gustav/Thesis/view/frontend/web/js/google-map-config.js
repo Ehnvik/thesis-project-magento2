@@ -69,12 +69,22 @@ define(['jquery', 'jquery-ui-modules/widget'], function ($) {
                     title: store.name,
                 });
 
-                const infowindowContent =
-                    `<div><strong>${store.name}</strong><br>` +
-                    `Address: ${store.address},<br>` +
-                    `${store.city}, ${store.postcode}, ${store.country}<br>` +
-                    `Phone: ${store.phone}<br>` +
-                    `Open: ${store.hours}</div>`;
+                const formattedPhone = store.phone.replace(/^(08)/, '$1-');
+
+                const infowindowContent = `
+                    <div class="info-window-container">
+                        <h3 class="info-window-name">${store.name}</h3>
+                        <p class="info-window-address">${store.address}</p>
+                        <div class="info-window-location">
+                            <span class="location-city">${store.city},</span>
+                            <span class="location-postcode">${store.postcode},</span>
+                            <span class="location-country">${store.country}</span>
+                        </div>
+                        <div class="info-window-contact">
+                            <p class="contact-hours">${store.hours}</p>
+                            <p class="contact-phone">${formattedPhone}</p>
+                        </div>
+                    </div>`;
                 const infowindow = new google.maps.InfoWindow({
                     content: infowindowContent,
                 });

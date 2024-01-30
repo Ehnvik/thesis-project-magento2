@@ -86,20 +86,52 @@ define(['jquery', 'mage/url'], function ($, urlBuilder) {
         },
 
         _renderStores: function (stores) {
-            let html = '<ul>';
+            let html = '<div class="stores-list">';
 
             stores.forEach(function (store) {
-                html += `<li class="store-item" data-store-id="${store.id}">Name: ${store.name}</li>`;
+                const formattedPhone = store.phone.replace(/^(08)/, '$1-');
+
+                html += `
+            <div class="store-container">
+                <div class="store-name-container">
+                <h3 class="store-name">${store.name}</h3>
+                </div>
+                <div class="store-info-contact-wrapper">
+                <div class="store-info-container">
+                <p class="store-address">${store.address}</p>
+                <div class="store-location-container">
+                <span class="store-city">${store.city},</span>
+                <span class="store-postcode">${store.postcode},</span>
+                <span class="store-country">${store.country}</span>
+                </div>
+                </div>
+                <div class="store-contact-container">
+                <p class="store-hours">${store.hours}</p>
+                <p class="store-phone">${formattedPhone}</p>
+                </div>
+                </div>
+                <div class="show-on-map-container">
+                    <a href="#" class="show-on-map" data-store-id="${store.id}">Show on Map</a>
+                </div>
+            </div>
+        `;
             });
 
-            html += '</ul>';
+            html += '</div>';
             this.element.html(html);
             this._addStoreClickListeners();
         },
 
         _addStoreClickListeners: function () {
-            this.element.find('.store-item').on('click', function () {
+            this.element.find('.show-on-map').on('click', function () {
                 const storeId = $(this).data('store-id');
+
+                $('html, body').animate(
+                    {
+                        scrollTop: $('#map').offset().top,
+                    },
+                    1000
+                );
 
                 $(document).trigger('storeSelected', storeId);
             });
@@ -117,7 +149,7 @@ define(['jquery', 'mage/url'], function ($, urlBuilder) {
 
             for (let i = 1; i <= pageCount; i++) {
                 paginationHtml += `<a href="#" data-page="${i}" ${
-                    currentPage === i ? 'class="current"' : ''
+                    currentPage === i ? 'class="current-page"' : ''
                 }>${i}</a>`;
             }
 
