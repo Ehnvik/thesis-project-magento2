@@ -132,6 +132,9 @@
                 <dataType>text</dataType>
                 <label translate="true">Categories</label>
                 <dataScope>category_ids</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
             </settings>
             <formElements>
                 <multiselect>
@@ -141,7 +144,6 @@
                 </multiselect>
             </formElements>
         </field>
-
 
     </fieldset>
 </form>

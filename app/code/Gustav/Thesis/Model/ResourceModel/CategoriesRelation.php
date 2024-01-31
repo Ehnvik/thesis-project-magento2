@@ -20,6 +20,17 @@ class CategoriesRelation extends AbstractDb
         return $connection->fetchCol($select);
     }
 
+    public function getCategoryIdsByStoreId($storeId)
+    {
+        $connection = $this->getConnection();
+        $select = $connection->select()
+            ->from($this->getMainTable(), 'category_id')
+            ->where('store_id = ?', $storeId);
+
+        return $connection->fetchCol($select);
+    }
+
+
     public function deleteByStoreId($storeId): void
     {
         $connection = $this->getConnection();

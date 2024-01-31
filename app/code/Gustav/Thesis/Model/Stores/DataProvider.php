@@ -1,53 +1,37 @@
 <?php
 namespace Gustav\Thesis\Model\Stores;
 
-use Gustav\Thesis\Model\ResourceModel\Stores\CollectionFactory;
 use Magento\Framework\App\RequestInterface;
 use Magento\Ui\DataProvider\AbstractDataProvider;
+use Gustav\Thesis\Model\ResourceModel\Stores\CollectionFactory;
+use Gustav\Thesis\Model\ResourceModel\CategoriesRelation;
 
 class DataProvider extends AbstractDataProvider
 {
-    /**
-     * @var RequestInterface
-     */
     private $request;
+    private $categoriesRelation;
 
-    /**
-     * @var array
-     */
     protected $loadedData;
 
-    /**
-     * @param string $name
-     * @param string $primaryFieldName
-     * @param string $requestFieldName
-     * @param CollectionFactory $collectionFactory
-     * @param RequestInterface $request
-     * @param array $meta
-     * @param array $data
-     */
     public function __construct(
         $name,
         $primaryFieldName,
         $requestFieldName,
         CollectionFactory $collectionFactory,
         RequestInterface $request,
+        CategoriesRelation $categoriesRelation,
         array $meta = [],
         array $data = []
     ) {
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
         $this->collection = $collectionFactory->create();
         $this->request = $request;
+        $this->categoriesRelation = $categoriesRelation;
     }
 
-    /**
-     * Get data
-     *
-     * @return array
-     */
     public function getData(): array
     {
-        if (isset($this->loadedData)) {
+        if (!empty($this->loadedData)) {
             return $this->loadedData;
         }
 
@@ -56,6 +40,10 @@ class DataProvider extends AbstractDataProvider
         $storeId = $this->request->getParam('store_id');
         if ($storeId) {
             $storeData = $this->collection->getItemById($storeId)->getData();
+
+            $categoryIds = $this->categoriesRelation->getCategoryIdsByStoreId($storeId);
+            $storeData['category_ids'] = $categoryIds;
+
             if ($storeData) {
                 $this->loadedData[$storeId] = $storeData;
             }
@@ -63,4 +51,5 @@ class DataProvider extends AbstractDataProvider
 
         return $this->loadedData ?: $data;
     }
+
 }
