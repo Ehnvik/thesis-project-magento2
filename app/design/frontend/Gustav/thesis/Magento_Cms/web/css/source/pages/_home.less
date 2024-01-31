@@ -1,0 +1,117 @@
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+  .cms-index-index {
+      .page-wrapper {
+          background-image: url('@{baseDir}images/bg-image-earth.jpg');
+          min-height: 100vh;
+          background-position: center;
+          font-family: @font-family__nunito;
+          color: @color-general-black;
+
+          .page-main {
+              margin-right: auto;
+              padding: 0 0 0 5%;
+              margin-top: 150px;
+
+              .column.main {
+                  padding-bottom: 0;
+
+                  .content-container {
+                      border-bottom: 1px solid @color-general-darker-grey;
+                      max-width: 400px;
+                      padding-bottom: 15px;
+
+                      .welcome-title {
+                          font-size: 36px;
+                          margin-left: 20px;
+                          margin-bottom: 30px;
+                          font-weight: @font-weight__regular;
+                      }
+
+                      .info-title {
+                          margin: 15px 0 30px 20px;
+                      }
+
+                      .button-container {
+                          margin-left: 20px;
+
+                          button {
+                              font-weight: @font-weight__regular;
+                              box-shadow: 1px 0 35px rgba(151, 149, 149, (50%)),
+                              0 10px 5px rgba(151, 149, 149, (10%));
+                          }
+                      }
+                  }
+              }
+          }
+      }
+  }
+}
+
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .cms-index-index {
+    }
+}
+
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .cms-index-index {
+        .page-wrapper {
+            .nav-sections {
+                margin-bottom: 0;
+            }
+
+            .page-main {
+                max-width: unset;
+                padding: 0 0 0 10%;
+
+                .column.main {
+                    padding-bottom: 0;
+
+                    .content-container {
+                        border-bottom: 1px solid @color-general-darker-grey;
+                        max-width: 400px;
+                        padding-bottom: 15px;
+
+                        .welcome-title {
+                            font-size: 46px;
+                        }
+
+                        .info-title {
+                            margin: 15px 0 30px 20px;
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .cms-index-index {
+        .page-wrapper {
+            .page-main {
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
+    .cms-index-index {
+
+    }
+}
