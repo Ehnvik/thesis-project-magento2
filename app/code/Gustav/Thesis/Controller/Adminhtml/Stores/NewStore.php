@@ -5,6 +5,7 @@ use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\View\Result\PageFactory;
 
+// Prepares the page for creating a new store within the admin panel. It extends Magentos Action class
 class NewStore extends Action
 {
     /**

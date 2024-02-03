@@ -4,6 +4,7 @@ namespace Gustav\Thesis\Model\ResourceModel;
 
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 
+// This class is responsible for performing database operations for the Categories entity
 class Categories extends AbstractDb
 {
     /**

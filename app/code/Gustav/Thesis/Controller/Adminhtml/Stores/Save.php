@@ -10,6 +10,7 @@ use Magento\Framework\App\Request\DataPersistor;
  use Gustav\Thesis\Model\ResourceModel\CategoriesRelation as CategoryRelationResource;
  use Gustav\Thesis\Model\CategoriesRelationFactory;
 
+ // Handles the save action for store data in the admin panel
 class Save extends Action
 {
     protected PageFactory $resultPageFactory;
@@ -36,6 +37,12 @@ class Save extends Action
          $this->categoriesRelationFactory = $categoriesRelationFactory;
          $this->categoryRelationResource = $categoryRelationResource;
     }
+
+    /**
+     * Executes the save action for both creating new stores and updating existing ones
+     * Validates and sanitizes input data, saves store data, manages category relations,
+     * and redirects to the appropriate page based on the result
+     */
 
     public function execute()
     {

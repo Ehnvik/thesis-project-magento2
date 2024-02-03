@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+<!-- Defines Content Security Policy (CSP) whitelist for the module to ensure content is loaded securely -->
 <csp_whitelist>
     <policies>
         <policy id="font-src">

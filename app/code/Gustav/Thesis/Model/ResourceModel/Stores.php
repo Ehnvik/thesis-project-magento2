@@ -3,6 +3,7 @@ namespace Gustav\Thesis\Model\ResourceModel;
 
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 
+// Handles database operations to the stores table
 class Stores extends AbstractDb
 {
     /**

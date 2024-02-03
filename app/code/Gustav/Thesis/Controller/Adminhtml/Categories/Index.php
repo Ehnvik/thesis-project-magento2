@@ -18,12 +18,13 @@ class Index extends Action
         parent::__construct($context);
         $this->resultPageFactory = $resultPageFactory;
     }
-
+    // The execute method is the main action method that Magento 2 will call when the route to this controller is accessed
     public function execute(): ResultInterface
     {
         return $this->resultPageFactory->create();
     }
 
+    // Method to check if the current admin user has the permission to view this page
     protected function _isAllowed(): bool
     {
         return $this->_authorization->isAllowed('Gustav_Thesis::manage_categories');

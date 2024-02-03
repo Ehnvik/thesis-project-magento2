@@ -27,6 +27,7 @@ class StoreList implements HttpGetActionInterface
         $this->categoriesRelation = $categoriesRelation;
     }
 
+    // Controller for handling requests to list stores in the frontend
     public function execute()
     {
         $result = $this->jsonFactory->create();
@@ -43,12 +44,14 @@ class StoreList implements HttpGetActionInterface
         }
 
         if (!empty($searchQuery)) {
+            // Apply search filter if search term is provided
             $collection->addFieldToFilter('store_name', ['like' => '%' . $searchQuery . '%']);
         }
 
         $collection->setPageSize($pageSize);
         $collection->setCurPage($page);
 
+        // Prepare store data for response
         $stores = [];
         foreach ($collection as $store) {
             $stores[] = [
@@ -65,6 +68,7 @@ class StoreList implements HttpGetActionInterface
             ];
         }
 
+        // Set response data
         $result->setData([
             'stores' => $stores,
             'total_count' => $collection->getSize()

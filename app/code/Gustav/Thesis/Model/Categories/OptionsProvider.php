@@ -26,6 +26,8 @@ class OptionsProvider implements OptionSourceInterface
      *
      * @return array
      */
+
+    // Generate an array of options for category dropdowns
     public function toOptionArray(): array
     {
         $collection = $this->categoriesCollectionFactory->create();

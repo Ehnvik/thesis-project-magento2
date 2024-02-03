@@ -54,9 +54,11 @@ class MassDelete extends Action
     {
         $redirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
         try {
+            // Applying the mass action filter to the category collection
             $collection = $this->filter->getCollection($this->collectionFactory->create());
             $categoriesDeleted = 0;
 
+            // Looping through the collection and deleting each category.
             foreach ($collection->getItems() as $category) {
                 $this->categoryResource->delete($category);
                 $categoriesDeleted++;
@@ -73,6 +75,7 @@ class MassDelete extends Action
             $this->messageManager->addErrorMessage(__('An error occurred while deleting categories.'));
         }
 
+        // Redirecting back to the categories index page.
         $redirect->setPath('*/*/index');
         return $redirect;
     }

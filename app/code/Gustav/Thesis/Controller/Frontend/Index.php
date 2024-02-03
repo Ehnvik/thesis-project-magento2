@@ -31,6 +31,8 @@ class Index implements HttpGetActionInterface
     /**
      * @return Page
      */
+
+    // Executes action based on incoming request and returns a result page
     public function execute()
     {
         return $this->resultPageFactory->create();
