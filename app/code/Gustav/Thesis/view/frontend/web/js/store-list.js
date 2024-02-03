@@ -1,6 +1,7 @@
 define(['jquery', 'mage/url'], function ($, urlBuilder) {
     'use strict';
 
+    // Initializes the store list widget with default options and binds events
     $.widget('gustav.storeList', {
         options: {
             actionUrl: '/storelocator/frontend/storelist',
@@ -9,11 +10,13 @@ define(['jquery', 'mage/url'], function ($, urlBuilder) {
             currentCategory: '',
         },
 
+        // Called when the widget is created; initializes the widget
         _create: function () {
             this._bindEvents();
             this._loadStores(this.options.currentPage);
         },
 
+        // Binds event handlers to UI elements
         _bindEvents: function () {
             const self = this;
 
@@ -58,6 +61,7 @@ define(['jquery', 'mage/url'], function ($, urlBuilder) {
             });
         },
 
+        // Fetches and loads stores based on the current page, selected category, and search query
         _loadStores: function (page, categoryId = '', searchQuery = '') {
             const self = this;
 
@@ -85,6 +89,7 @@ define(['jquery', 'mage/url'], function ($, urlBuilder) {
             });
         },
 
+        // Renders the store list HTML based on the fetched stores data
         _renderStores: function (stores) {
             let html = '<div class="stores-list">';
 
@@ -122,6 +127,7 @@ define(['jquery', 'mage/url'], function ($, urlBuilder) {
             this._addStoreClickListeners();
         },
 
+        // Adds click event listeners to store listings for map interaction
         _addStoreClickListeners: function () {
             this.element.find('.show-on-map').on('click', function () {
                 const storeId = $(this).data('store-id');
@@ -137,6 +143,7 @@ define(['jquery', 'mage/url'], function ($, urlBuilder) {
             });
         },
 
+        // Renders pagination controls based on total stores and current page
         _renderPagination: function (totalCount, currentPage) {
             let pageCount = Math.ceil(totalCount / this.options.pageSize);
             let paginationHtml = '<div class="pagination">';

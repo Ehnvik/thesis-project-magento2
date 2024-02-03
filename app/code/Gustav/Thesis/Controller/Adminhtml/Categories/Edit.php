@@ -35,6 +35,7 @@ class Edit extends Action
             $category = $this->categoriesFactory->create();
             $this->categoryResource->load($category, $categoryId);
 
+            // If the category with the provided ID does not exist, show an error message and redirect
             if (!$category->getId()) {
                 $this->messageManager->addErrorMessage(__('This category no longer exists.'));
                 return $this->resultRedirectFactory->create()->setPath('*/*/');
@@ -45,6 +46,7 @@ class Edit extends Action
             $title->set(__('New Category'));
         }
 
+        // Return the result page object to render the edit or new category UI
         return $resultPage;
     }
 }

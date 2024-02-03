@@ -7,6 +7,7 @@ use Gustav\Thesis\Model\ResourceModel\Categories as ResourceModel;
 
 class Collection extends AbstractCollection
 {
+    // Initialize collection model and resource model
     protected function _construct(): void
     {
         $this->_init(Model::class, ResourceModel::class);

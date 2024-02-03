@@ -3,6 +3,7 @@ namespace Gustav\Thesis\Model\ResourceModel;
 
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 
+// Handles database operations for the relationship between stores and categories
 class CategoriesRelation extends AbstractDb
 {
     protected function _construct(): void

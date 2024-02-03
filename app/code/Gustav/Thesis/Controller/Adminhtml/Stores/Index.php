@@ -30,11 +30,14 @@ class Index extends Action
      *
      * @return ResultInterface
      */
+
+    // Executes the action: Generates and returns the page displaying the stores list
     public function execute(): ResultInterface
     {
         return $this->resultPageFactory->create();
     }
 
+    // Checks permission for the action based on ACL configuration
     protected function _isAllowed(): bool
     {
         return $this->_authorization->isAllowed('Gustav_Thesis::manage_stores');

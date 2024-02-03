@@ -46,6 +46,8 @@ class DataProvider extends AbstractDataProvider
      *
      * @return array
      */
+
+    // Retrieves data for the UI component. It fetches data related to a specific category based on the request parameters
     public function getData(): array
     {
         if (isset($this->loadedData)) {

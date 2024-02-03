@@ -34,9 +34,11 @@ class Save extends Action
         $redirect = $this->resultRedirectFactory->create();
         $data = $this->getRequest()->getPostValue();
 
+        // Extracts category ID from the data, if available
         $categoryId = $data['category_id'] ?? null;
 
         if (!$data) {
+            // Adds an error message and redirects to the categories index page if no data is found.
             $this->messageManager->addErrorMessage(__('No data to save.'));
             return $redirect->setPath('*/*/index');
         }
@@ -46,6 +48,7 @@ class Save extends Action
         $validationErrors = $this->validateData($data);
 
         if (!empty($validationErrors)) {
+            // Adds each validation error as an error message
             foreach ($validationErrors as $error) {
                 $this->messageManager->addErrorMessage($error);
             }
@@ -60,6 +63,7 @@ class Save extends Action
         }
 
         try {
+            // Attempts to save the category data
             $category = $this->categoriesFactory->create();
             $category->setData($data);
             $this->categoryResource->save($category);
@@ -79,7 +83,7 @@ class Save extends Action
         }
     }
 
-
+    // Validates the posted data and returns an array of error messages
     private function validateData($data): array
     {
         $errors = [];

@@ -22,8 +22,8 @@ class NewCategory extends Action
 
     public function execute()
     {
-        $resultPage = $this->resultPageFactory->create();
-        $resultPage->getConfig()->getTitle()->prepend(__('New Category'));
+        $resultPage = $this->resultPageFactory->create(); // Creates a new result page instance
+        $resultPage->getConfig()->getTitle()->prepend(__('New Category')); // Sets the page title to "New Category"
 
         return $resultPage;
     }

@@ -22,6 +22,7 @@ class Delete extends Action
         $this->categoryResource = $categoryResource;
     }
 
+    // The execute method is where the action to delete a category is performed
     public function execute()
     {
         $redirect = $this->resultRedirectFactory->create();
@@ -33,6 +34,7 @@ class Delete extends Action
         }
 
         try {
+            // Attempt to load the category using the provided ID. This is to ensure that the category exists before attempting deletion
             $category = $this->categoriesFactory->create();
             $this->categoryResource->load($category, $categoryId);
 

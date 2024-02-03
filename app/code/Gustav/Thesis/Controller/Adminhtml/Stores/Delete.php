@@ -25,6 +25,7 @@ class Delete extends Action
     public function execute()
     {
         $redirect = $this->resultRedirectFactory->create();
+        // Retrieve the store ID from the request parameters
         $storeId = $this->getRequest()->getParam('store_id');
 
         if (!$storeId) {
@@ -33,6 +34,7 @@ class Delete extends Action
         }
 
         try {
+            // Create a store model and load the store by ID
             $store = $this->storeFactory->create();
             $this->storeResource->load($store, $storeId);
 
@@ -45,7 +47,7 @@ class Delete extends Action
         } catch (\Exception $e) {
             $this->messageManager->addErrorMessage(__('Error occurred while deleting the store: %1', $e->getMessage()));
         }
-
+        // Redirect back to the index page after operation completion.
         return $redirect->setPath('*/*/index');
     }
 }

@@ -10,6 +10,8 @@ use Magento\Ui\Component\MassAction\Filter;
 use Gustav\Thesis\Model\ResourceModel\Stores\CollectionFactory as StoresCollectionFactory;
 use Gustav\Thesis\Model\ResourceModel\Stores as StoreResource;
 
+
+// Handles the 'Mass Delete' action from the admin panel for stores. This allows the user to delete multiple stores
 class MassDelete extends Action
 {
     /**

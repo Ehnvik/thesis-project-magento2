@@ -6,6 +6,7 @@ use Magento\Ui\DataProvider\AbstractDataProvider;
 use Gustav\Thesis\Model\ResourceModel\Stores\CollectionFactory;
 use Gustav\Thesis\Model\ResourceModel\CategoriesRelation;
 
+// This class is responsible for providing data for the UI components
 class DataProvider extends AbstractDataProvider
 {
     private $request;

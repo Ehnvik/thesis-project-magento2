@@ -31,10 +31,12 @@ class Edit extends Action
         $resultPage = $this->resultPageFactory->create();
         $title = $resultPage->getConfig()->getTitle();
 
+        // Checks if a store ID is provided, implying an edit action on an existing store
         if ($storeId) {
             $store = $this->storeFactory->create();
             $this->storeResource->load($store, $storeId);
 
+            // If the store cannot be found by ID, display an error message and redirect.
             if (!$store->getId()) {
                 $this->messageManager->addErrorMessage(__('This store no longer exists.'));
                 return $this->resultRedirectFactory->create()->setPath('*/*/');
